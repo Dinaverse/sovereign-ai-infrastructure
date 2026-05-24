@@ -13,7 +13,21 @@ The laboratory is an interconnected network of five primary nodes, managed from 
 | Dell Precision | Orchestrator/Monitoring | <DELL_PRECISION_IP> | Online (SSH:30022) |
 | Canwork189 | Dedicated Storage/General | <CANWORK_IP> | Online |
 
-## 2. Host Specifications
+## 2. Technical Solutions & Error Resolutions
+
+### WSL2 Context Deadline Exceeded
+Connection timeouts and "context deadline exceeded" errors when performing Docker operations in WSL2 on the Dell Precision orchestrator were resolved by:
+1. Increasing RAM and CPU limits in `~/.wslconfig`.
+2. Configuring Docker to use a local path for storage within WSL2 to minimize latency caused by the 9p filesystem mounting of the Windows host.
+
+### Samsung SSD Recovery Procedure
+Data corruption detected on the primary NVMe storage was resolved by:
+1. Booting into a rescue environment.
+2. Identifying bad sectors with `smartctl`.
+3. Creating a secure image of the disk using `ddrescue` for data recovery.
+4. Restoring data after hardware replacement and firmware repair.
+
+## 3. Host Specifications
 
 ### Kali Station (Local)
 - **CPU:** Intel Xeon E5-2630 v4 @ 2.20GHz
@@ -35,7 +49,7 @@ The laboratory is an interconnected network of five primary nodes, managed from 
 - **RAM:** 7.2 GiB
 - **Storage:** 46 GiB root, 159 GiB /local partition
 
-## 3. Agent Network (Arch Cluster - <ARCH_CLUSTER_IP>)
+## 4. Agent Network (Arch Cluster - <ARCH_CLUSTER_IP>)
 Agents are deployed in `~/agents/` and managed as background services.
 
 | Agent | Function | Execution Method |
@@ -44,14 +58,14 @@ Agents are deployed in `~/agents/` and managed as background services.
 | Net-Analyzer | Hourly OSINT/Recon | Background Loop (`time.sleep`) |
 | R&D Agent | Fine-tuning/Training | Skeleton (Manual Trigger) |
 
-## 4. Orchestrator & Monitoring (Dell Precision - <DELL_PRECISION_IP>)
+## 5. Orchestrator & Monitoring (Dell Precision - <DELL_PRECISION_IP>)
 - **Monitoring Stack:** Grafana/Prometheus (Docker-based).
 - **Access:** SSH via Port 30022.
 - **Persistence:** Managed via `docker-compose`.
-- **Status:** Deployment triggered via `docker-compose up -d`.
 
-## 5. Persistence & Automation
+## 6. Persistence & Automation
 - **SSH Access:** All nodes configured for passwordless access via `~/.ssh/id_lab_master`.
 - **Automation:** Agents operate via background persistent loops (`nohup` + `&`).
 - **Configuration:** Stable settings enforced via `~/.ssh/config` (KeepAlive settings).
 EOF
+,file_path:
