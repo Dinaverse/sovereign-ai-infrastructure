@@ -1,9 +1,24 @@
-# Samsung SSD Recovery Procedure
+# Procédure de Récupération - SSD Samsung
 
-## Context
-Data corruption detected on primary NVMe storage.
+## Contexte
+Corruption de données détectée sur le SSD NVMe principal (Samsung).
 
-## Procedure
-1. **Live Environment**: Booted from a rescue USB.
-2. **Diagnosis**: Used `smartctl` to identify bad sectors.
-3. **Recovery**: Ran manufacturer-specific firmware update/repair tools and used `ddrescue` to image the drive to a stable medium, then restored data from the image.
+## Prérequis
+- Clé USB de secours (Live Linux)
+- Outils : smartctl, ddrescue
+
+## Étapes de récupération
+1. **Démarrage sur environnement de secours :** Démarrage à partir d'une clé USB Live Linux pour isoler le disque.
+2. **Diagnostic :**
+   - Identification des secteurs défectueux via la commande : `sudo smartctl -a /dev/nvme0n1`
+3. **Récupération des données :**
+   - Utilisation de `ddrescue` pour créer une image disque sécurisée vers un support externe :
+     `sudo ddrescue -f -n /dev/nvme0n1 /mnt/backup/image.img /mnt/backup/mapfile.log`
+4. **Restauration :**
+   - Montage de l'image pour récupération des fichiers critiques.
+   - Remplacement du matériel défectueux.
+   - Restauration des données à partir de l'image `ddrescue`.
+
+## Leçons apprises
+- Importance critique des sauvegardes régulières (RPO/RTO).
+- Utilisation de systèmes de fichiers résistants (Btrfs/ZFS) recommandée.
