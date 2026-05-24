@@ -69,3 +69,6 @@ Agents are deployed in `~/agents/` and managed as background services.
 - **Configuration:** Stable settings enforced via `~/.ssh/config` (KeepAlive settings).
 EOF
 ,file_path:
+### MCP Server Initialisation
+*   **Problème :** Échec de communication/initialisation du serveur MCP de sécurité.
+*   **Solution :** Vérification de la configuration TypeScript, validation des permissions d'exécution des binaires du serveur, et synchronisation des chemins dans le registre des outils (`tool-registry.json`).
