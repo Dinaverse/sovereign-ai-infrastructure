@@ -15,7 +15,7 @@ Your lab is a model of ingenuity, converting enterprise hardware, virtualization
 
 ### 🏗️ Node 2: Development Station (Dell Precision)
 *   **OS:** Windows 11 Pro + WSL2 (Ubuntu 24.04.4 LTS / Kernel 6.6.114)
-*   **WSL IP:** 172.27.19.161/20 (Stable NAT mode)
+*   **WSL IP:** <INTERNAL_IP>/20 (Stable NAT mode)
 *   **Chassis / Model:** Dell Precision Tower 5810
 *   **CPU:** Intel Xeon E5-1603 v3 (4 Cores / 4 Threads) @ 2.80GHz
 *   **RAM:** 32GB installed
@@ -69,7 +69,7 @@ Your ecosystem is designed for absolute privacy and maximum performance:
 ## 4. PROJECT DIRECTION & EVOLUTION (TARGET NETWORK)
 
 Final goal is total LAN interconnection:
-1.  **Remote Ollama:** Configure Ollama on the Arch cluster (`OLLAMA_HOST=0.0.0.0`) to serve the local network.
+1.  **Remote Ollama:** Configure Ollama on the Arch cluster (`OLLAMA_HOST=<INTERNAL_IP>`) to serve the local network.
 2.  **Centralized Orchestration:** Link Open WebUI on Dell Precision (32GB RAM) to Arch compute brain (24GB VRAM) and Kali offensive capabilities (64GB RAM).
 3.  **GitHub Portfolio:** Highlighting "Secure Zone Analysis," "User Filtering," and the multi-GPU optimization guide.
 EOF

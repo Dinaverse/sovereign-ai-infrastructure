@@ -37,7 +37,7 @@ Généré le : 23 Mai 2026
 
 ## 5. Dell Precision (<DELL_PRECISION_IP>)
 - **OS:** Ubuntu 24.04.4 LTS (WSL2)
-- **Kernel:** 6.6.114.1-microsoft-standard-WSL2
+- **Kernel:** <INTERNAL_IP>-microsoft-standard-WSL2
 - **CPU:** Intel(R) Xeon(R) E5-1603 v3 @ 2.79 GHz
 - **GPU:** NVIDIA GeForce GTX 1060 6GB
 - **RAM:** 15.58 GiB
