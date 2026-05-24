@@ -10,7 +10,7 @@ The laboratory is an interconnected network of five primary nodes, managed from 
 | Kali Station | Orchestrator/Controller | Local | Online |
 | Arch Cluster | Primary Agent Node/Compute | <ARCH_CLUSTER_IP> | Online |
 | Raspberry Pi | Pi-hole/Network Services | <RASPBERRY_PI_IP> | Online |
-| Dell Precision | Orchestrator/Monitoring | <DELL_PRECISION_IP> | Online (SSH:30022) |
+| Dell Precision | Orchestrator/Monitoring | <DELL_PRECISION_IP> | Online |
 | Canwork189 | Dedicated Storage/General | <CANWORK_IP> | Online |
 
 ## 2. Technical Solutions & Error Resolutions
