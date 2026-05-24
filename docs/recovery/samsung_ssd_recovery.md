@@ -1,24 +1,24 @@
-# Procédure de Récupération - SSD Samsung
+# Samsung SSD Recovery Procedure
 
-## Contexte
-Corruption de données détectée sur le SSD NVMe principal (Samsung).
+## Context
+Data corruption detected on the primary NVMe storage (Samsung).
 
-## Prérequis
-- Clé USB de secours (Live Linux)
-- Outils : smartctl, ddrescue
+## Prerequisites
+- Rescue USB drive (Live Linux)
+- Tools: `smartctl`, `ddrescue`
 
-## Étapes de récupération
-1. **Démarrage sur environnement de secours :** Démarrage à partir d'une clé USB Live Linux pour isoler le disque.
-2. **Diagnostic :**
-   - Identification des secteurs défectueux via la commande : `sudo smartctl -a /dev/nvme0n1`
-3. **Récupération des données :**
-   - Utilisation de `ddrescue` pour créer une image disque sécurisée vers un support externe :
+## Recovery Steps
+1. **Boot into Rescue Environment:** Boot from a Live Linux USB to isolate the drive.
+2. **Diagnosis:**
+   - Identify bad sectors using: `sudo smartctl -a /dev/nvme0n1`
+3. **Data Recovery:**
+   - Use `ddrescue` to create a secure disk image to an external medium:
      `sudo ddrescue -f -n /dev/nvme0n1 /mnt/backup/image.img /mnt/backup/mapfile.log`
-4. **Restauration :**
-   - Montage de l'image pour récupération des fichiers critiques.
-   - Remplacement du matériel défectueux.
-   - Restauration des données à partir de l'image `ddrescue`.
+4. **Restoration:**
+   - Mount the image to recover critical files.
+   - Replace faulty hardware.
+   - Restore data from the `ddrescue` image.
 
-## Leçons apprises
-- Importance critique des sauvegardes régulières (RPO/RTO).
-- Utilisation de systèmes de fichiers résistants (Btrfs/ZFS) recommandée.
+## Lessons Learned
+- Critical importance of regular backups (RPO/RTO).
+- Use of resilient file systems (Btrfs/ZFS) is recommended.
