@@ -1,6 +1,6 @@
 # 🏗️ Sovereign AI Infrastructure
 
-> *Centralized architecture documentation for a distributed, cloud-agnostic AI and security laboratory — engineered for resilience, privacy, and bare-metal performance.*
+> *Centralized architecture documentation for a distributed, cloud-agnostic AI and security laboratory - engineered for resilience, privacy, and bare-metal performance.*
 
 ---
 
@@ -17,13 +17,13 @@ This repository is the **single source of truth** for the architecture and opera
 ```
 [Internet]
      │
-  [Dell — Gateway / Monitoring Node]
+  [Dell - Gateway / Monitoring Node]
      │
   [Internal LAN]
-     ├── [Kali — Master Orchestrator & SecOps Hub]
-     ├── [Arch — GPU Compute Cluster]   ← 4x NVIDIA P106-100 / 24 GB VRAM
-     ├── [Raspberry Pi — IDS / DNS / Network Services]
-     └── [AMD Canwork189 — Storage & CPU Worker]
+     ├── [Kali - Master Orchestrator & SecOps Hub]
+     ├── [Arch - GPU Compute Cluster]   ← 4x NVIDIA P106-100 / 24 GB VRAM
+     ├── [Raspberry Pi - IDS / DNS / Network Services]
+     └── [AMD Canwork189 - Storage & CPU Worker]
 ```
 
 ### Node Roles
@@ -31,7 +31,7 @@ This repository is the **single source of truth** for the architecture and opera
 | Node | OS | Primary Role |
 |------|----|--------------|
 | **Kali** | Kali Linux | Master orchestrator, SecOps, MCP Bridge |
-| **Arch** | Arch Linux | GPU inference cluster — Ollama + CUDA |
+| **Arch** | Arch Linux | GPU inference cluster - Ollama + CUDA |
 | **Raspberry Pi** | Raspbian | IDS (Suricata), DNS, network monitoring |
 | **Dell** | Debian | Gateway, Grafana/Prometheus, uptime monitoring |
 | **AMD Canwork189** | Ubuntu Server | Distributed storage, CPU-bound workloads |
@@ -44,27 +44,27 @@ This repository is the **single source of truth** for the architecture and opera
 |-----------|---------|
 | **Runtime** | Ollama (local, no cloud) |
 | **Model** | Qwen 3.5:27B |
-| **GPU Setup** | 4x NVIDIA P106-100 — 6 GB each = 24 GB VRAM total |
+| **GPU Setup** | 4x NVIDIA P106-100 - 6 GB each = 24 GB VRAM total |
 | **Framework** | CUDA multi-GPU with layer offloading |
 | **Host OS** | Arch Linux (optimized kernel + DKMS) |
 
 ```mermaid
 graph TD
     A[Inbound Inference Request] --> B(Ollama Load Balancer)
-    B --> C[GPU 0: P106-100 — 6GB]
-    B --> D[GPU 1: P106-100 — 6GB]
-    B --> E[GPU 2: P106-100 — 6GB]
-    B --> F[GPU 3: P106-100 — 6GB]
+    B --> C[GPU 0: P106-100 - 6GB]
+    B --> D[GPU 1: P106-100 - 6GB]
+    B --> E[GPU 2: P106-100 - 6GB]
+    B --> F[GPU 3: P106-100 - 6GB]
 ```
 
 ---
 
 ## 📊 Monitoring & Observability
 
-- **Grafana** — Real-time dashboards for GPU metrics, system health, network traffic
-- **Prometheus** — Metrics collection across all nodes
-- **Suricata IDS** — Network intrusion detection on Raspberry Pi node
-- **Custom Python Agents** — Host-level log analytics and anomaly detection
+- **Grafana** - Real-time dashboards for GPU metrics, system health, network traffic
+- **Prometheus** - Metrics collection across all nodes
+- **Suricata IDS** - Network intrusion detection on Raspberry Pi node
+- **Custom Python Agents** - Host-level log analytics and anomaly detection
 
 ---
 
@@ -101,4 +101,4 @@ graph TD
 
 ---
 
-*Sovereign by design — every component runs locally, owned entirely.*
+*Sovereign by design - every component runs locally, owned entirely.*
