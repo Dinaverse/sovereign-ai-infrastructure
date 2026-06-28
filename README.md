@@ -1,48 +1,63 @@
-# 🐳 Sovereign Docker Hosting & Containerization
+# 🐳 Sovereign Docker Hosting
 
-This repository documents the use of **Docker** for application hosting and orchestration within my sovereign infrastructure. It explains the core concepts of containerization and provides practical examples of how I manage distributed services.
-
-## 💡 What is Docker Containerization?
-
-Docker is a platform that uses **OS-level virtualization** to deliver software in packages called **containers**. Containers are isolated from each other and bundle their own software, libraries, and configuration files; they can communicate with each other through well-defined channels.
-
-### Key Benefits:
-- **Isolation:** Each application runs in its own sandbox, preventing dependency conflicts.
-- **Portability:** Applications run identically on any system that supports Docker (Kali, Arch, Ubuntu, etc.).
-- **Efficiency:** Containers share the host's kernel, making them much lighter and faster than traditional Virtual Machines (VMs).
-- **Scalability:** Services can be easily replicated and managed through orchestration tools.
+> *Documentation and configuration for Docker-based application hosting within the sovereign lab — containerized services running fully on-premises with no cloud dependencies.*
 
 ---
 
-## 🏗️ How I Host Applications
+## 🎯 Overview
 
-I leverage **Docker Compose** to define and run multi-container applications. This allows for reproducible deployments and simplified management of complex stacks.
-
-### 🔧 Orchestration with Docker Compose
-My lab environment uses `docker-compose.yml` files to manage:
-- **AI Inference Nodes:** Hosting LLMs via Ollama and specialized compute containers.
-- **Monitoring Stacks:** Deploying Prometheus and Grafana for infrastructure visibility.
-- **Security Tools:** Running isolated instances of analysis and monitoring utilities.
-
-### 🔗 MCP Integration
-I use specialized Docker configurations (`docker_mcp_config.json`) to bridge the gap between AI agents and the underlying host system, allowing for secure, containerized tool execution.
+This repository documents the Docker hosting layer of the sovereign lab infrastructure. All services are containerized and orchestrated via Docker Compose, providing isolation, reproducibility, and easy redeployment across nodes.
 
 ---
 
-## 🛠️ Getting Started
+## 🧩 Hosted Services
 
-### Requirements
-- **Docker Engine:** v24.0 or higher.
-- **Docker Compose:** v2.0 or higher.
+| Service | Role | Port |
+|---------|------|------|
+| **Ollama** | Local LLM inference runtime | 11434 |
+| **Grafana** | Monitoring dashboards | 3000 |
+| **Prometheus** | Metrics collection | 9090 |
+| **n8n** | Workflow automation | 5678 |
+| **Portainer** | Docker management UI | 9443 |
 
-### Deployment Example
-```bash
-# Start the entire infrastructure stack
-docker-compose up -d
+---
 
-# Check running containers
-docker ps
+## 🏗️ Architecture
+
+```
+[Docker Host — Arch / Dell Node]
+        │
+  [Docker Engine]
+        ├── ollama        (LLM inference)
+        ├── grafana       (dashboards)
+        ├── prometheus    (metrics)
+        ├── n8n           (automation)
+        └── portainer     (management)
 ```
 
 ---
-*Orchestrating a resilient, containerized future - Developed by Dina.*
+
+## 🔧 Key Concepts
+
+### Container Isolation
+Each service runs in its own container with scoped network access. Inter-service communication uses a dedicated Docker bridge network — no host-network exposure unless required.
+
+### Persistent Storage
+All stateful services (Grafana, Prometheus, Ollama models) use named Docker volumes mapped to the host filesystem for data persistence across container restarts.
+
+### Reproducibility
+The entire stack is defined in `docker-compose.yml` — a single `docker compose up -d` restores the full environment from any node.
+
+---
+
+## 🔗 Related Repositories
+
+| Repository | Role |
+|------------|------|
+| [`local-ai-sovereign-stack`](https://github.com/Dinaverse/local-ai-sovereign-stack) | Full AI stack docker-compose |
+| [`sovereign-lab-orchestration`](https://github.com/Dinaverse/sovereign-lab-orchestration) | Orchestration methodology |
+| [`sovereign-ai-infrastructure`](https://github.com/Dinaverse/sovereign-ai-infrastructure) | Node architecture |
+
+---
+
+*Containerized sovereignty — every service self-hosted, every layer documented.*
