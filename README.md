@@ -1,6 +1,6 @@
 # 🐳 Sovereign Docker Hosting
 
-> *Documentation and configuration for Docker-based application hosting within the sovereign lab — containerized services running fully on-premises with no cloud dependencies.*
+> *Documentation and configuration for Docker-based application hosting within the sovereign lab - containerized services running fully on-premises with no cloud dependencies.*
 
 ---
 
@@ -25,7 +25,7 @@ This repository documents the Docker hosting layer of the sovereign lab infrastr
 ## 🏗️ Architecture
 
 ```
-[Docker Host — Arch / Dell Node]
+[Docker Host - Arch / Dell Node]
         │
   [Docker Engine]
         ├── ollama        (LLM inference)
@@ -40,13 +40,13 @@ This repository documents the Docker hosting layer of the sovereign lab infrastr
 ## 🔧 Key Concepts
 
 ### Container Isolation
-Each service runs in its own container with scoped network access. Inter-service communication uses a dedicated Docker bridge network — no host-network exposure unless required.
+Each service runs in its own container with scoped network access. Inter-service communication uses a dedicated Docker bridge network - no host-network exposure unless required.
 
 ### Persistent Storage
 All stateful services (Grafana, Prometheus, Ollama models) use named Docker volumes mapped to the host filesystem for data persistence across container restarts.
 
 ### Reproducibility
-The entire stack is defined in `docker-compose.yml` — a single `docker compose up -d` restores the full environment from any node.
+The entire stack is defined in `docker-compose.yml` - a single `docker compose up -d` restores the full environment from any node.
 
 ---
 
@@ -60,4 +60,4 @@ The entire stack is defined in `docker-compose.yml` — a single `docker compose
 
 ---
 
-*Containerized sovereignty — every service self-hosted, every layer documented.*
+*Containerized sovereignty - every service self-hosted, every layer documented.*
