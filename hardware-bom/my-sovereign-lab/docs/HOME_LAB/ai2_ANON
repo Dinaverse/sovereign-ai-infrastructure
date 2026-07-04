@@ -1,0 +1,60 @@
+python-security-analytics/
+├── README.md (40+ scripts inventory)
+│
+├── 01-security-zone-analysis/
+│   ├─ zone_calculator.py
+│   ├─ coverage_analyzer.py
+│   ├─ visualization.py
+│   └─ README.md
+│
+├── 02-failed-login-analysis/
+│   ├─ login_parser.py
+│   ├─ brute_force_detector.py
+│   ├─ alert_generator.py
+│   └─ example_logs/
+│
+├── 03-session-duration-analysis/
+│   ├─ session_parser.py
+│   ├─ duration_analyzer.py
+│   ├─ anomaly_detector.py
+│   └─ test_data.csv
+│
+├── 04-cryptography/
+│   ├─ symmetric_encryption.py
+│   ├─ asymmetric_encryption.py
+│   ├─ hashing.py
+│   └─ key_management.py
+│
+├── 05-network-analysis/
+│   ├─ packet_capture.py
+│   ├─ port_scanner.py
+│   ├─ traffic_analysis.py
+│   └─ dns_analysis.py
+│
+├── 06-access-control/
+│   ├─ rbac_system.py
+│   ├─ user_authentication.py
+│   ├─ mfa_implementation.py
+│   └─ token_management.py
+│
+├── 07-laboratory/
+│   ├─ lab_01_password_strength.py
+│   ├─ lab_02_sql_injection.py
+│   ├─ lab_03_log_forensics.py
+│   ├─ lab_04_api_security.py
+│   └─ lab_solutions.py
+│
+├── 08-data-analysis/
+│   ├─ statistical_analysis.py
+│   ├─ visualization.py
+│   ├─ report_generation.py
+│   └─ sample_data.csv
+│
+├── tests/
+│   └─ test_all.py
+│
+├── requirements.txt
+└── examples/
+    ├─ basic-analysis.py
+    ├─ advanced-reporting.py
+    └─ batch-processing.py

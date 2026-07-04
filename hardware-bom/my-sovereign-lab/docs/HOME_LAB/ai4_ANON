@@ -1,0 +1,19 @@
+# WSL2 Docker Network Error: "context deadline exceeded"
+
+## Problem
+Docker in WSL2 fails with: "context deadline exceeded"
+
+## Root Cause
+.wslconfig using 'mirrored' mode instead of 'nat'
+
+## Solution
+[.wslconfig]
+[wsl2]
+networkingMode=nat  ← CRITICAL
+memory=28GB
+processors=4
+
+## Impact
+- Fixed Docker connectivity
+- Dell Precision now runs Open WebUI + OpenClaw
+- Enables Ollama remote access from Windows host

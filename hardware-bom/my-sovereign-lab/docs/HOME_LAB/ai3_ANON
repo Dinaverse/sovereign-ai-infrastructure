@@ -1,0 +1,15 @@
+arch-linux-multi-gpu-llm/
+  → See: sovereign-ai-infrastructure/infrastructure/arch-linux-cluster
+  → See: python-security-analytics for GPU monitoring scripts
+
+cybersecurity-lab-automation/
+  → See: sovereign-ai-infrastructure/infrastructure/kali-security-hub
+  → Links to python-security-analytics (Morpheus integration)
+
+local-ai-sovereign-stack/
+  → See: sovereign-ai-infrastructure (complete architecture)
+  → See: Dell WSL2 section for orchestration details
+
+infrastructure-as-code-lab/
+  → See: sovereign-ai-infrastructure/recovery-procedures
+  → Cross-reference all deployment scripts

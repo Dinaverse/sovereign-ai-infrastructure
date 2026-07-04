@@ -1,0 +1,48 @@
+┌─────────────────────────────────────────────────────────┐
+│  SOVEREIGN AI INFRASTRUCTURE MASTER REPO               │
+├─────────────────────────────────────────────────────────┤
+│                                                         │
+│  1. COMPUTE LAYER (Arch Cluster)                       │
+│     ├─ GPU optimization guide                          │
+│     ├─ GRUB + mkinitcpio configs                       │
+│     ├─ TensorRT-LLM compilation                        │
+│     └─ Multi-GPU Ollama setup                          │
+│                                                         │
+│  2. ORCHESTRATION LAYER (Dell WSL2)  ⚠️ WSL FIX HERE   │
+│     ├─ .wslconfig (NAT vs mirrored)                    │
+│     ├─ Docker networking fix (context deadline)        │
+│     ├─ WSL2 mount strategy (9p protocol)               │
+│     ├─ Open WebUI + Docker Compose                     │
+│     └─ Grafana monitoring                              │
+│                                                         │
+│  3. SECURITY LAYER (Kali)                              │
+│     ├─ 28 integrated tools                             │
+│     ├─ MCP native bridge                               │
+│     ├─ Morpheus SID detection                          │
+│     └─ G0DM0D3 red teaming                             │
+│                                                         │
+│  4. NETWORK LAYER (Raspberry Pi)                       │
+│     ├─ Suricata IDS                                    │
+│     ├─ Pi-hole DNS                                     │
+│     └─ Network orchestration                           │
+│                                                         │
+│  5. PYTHON ANALYTICS SUITE ⭐ 40+ SCRIPTS              │
+│     ├─ Security zone analysis (géométrie)              │
+│     ├─ Failed login detection (brute force)            │
+│     ├─ Session duration anomaly                        │
+│     ├─ Cryptography fundamentals                       │
+│     ├─ Network packet analysis                         │
+│     ├─ Access control systems                          │
+│     ├─ Practical labs (7 modules)                      │
+│     └─ Data analysis & reporting                       │
+│                                                         │
+│  6. DISASTER RECOVERY ⭐ WSL SYSTEM RECOVERY            │
+│     ├─ Samsung SSD rescue procedure                    │
+│     ├─ Sources.list recovery                           │
+│     ├─ VirtualBox raw disk mapping                     │
+│     ├─ Package downgrade strategy                      │
+│     ├─ Desktop environment restoration                 │
+│     ├─ Backup automation scripts                       │
+│     └─ Cross-platform portability guide                │
+│                                                         │
+└─────────────────────────────────────────────────────────┘

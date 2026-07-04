@@ -1,0 +1,42 @@
+sovereign-ai-infrastructure/
+├── README.md (System overview)
+├── QUICK_START.md
+│
+├── docs/
+│   ├── ARCHITECTURE.md
+│   ├── NETWORK_TOPOLOGY.md
+│   ├── PERFORMANCE_METRICS.md
+│   └── DISASTER_RECOVERY_GUIDE.md ⭐
+│
+├── infrastructure/
+│   ├── arch-linux-cluster/
+│   │   ├── gpu-optimization.sh
+│   │   ├── mkinitcpio.conf
+│   │   ├── grub-default
+│   │   ├── nvidia-setup.md
+│   │   └── tensorrt-llm-compile.sh
+│   │
+│   ├── dell-precision-wsl2/ ⭐ WSL FIX DETAILED
+│   │   ├── .wslconfig (fixed version)
+│   │   ├── WSL2_DOCKER_FIX.md (context deadline fix)
+│   │   ├─ docker-compose.yml
+│   │   ├─ networking-troubleshooting.md
+│   │   └─ mount-strategy-9p.md
+│   │
+│   └── kali-security-hub/
+│       ├─ hotspot-setup.sh
+│       ├─ mcp-bridge.js
+│       └─ 28-tools-inventory.md
+│
+├── recovery-procedures/ ⭐ SYSTEM RECOVERY
+│   ├── WSL_SYSTEM_RECOVERY.md (Samsung SSD fix)
+│   ├── samsung-ssd-rescue.sh
+│   ├── virtualbox-raw-disk-mapping.md
+│   ├── package-downgrade-strategy.md
+│   ├── ubuntu-desktop-restoration.md
+│   └── cross-platform-portability.md
+│
+└── scripts/
+    ├── deploy-all.sh
+    ├── health-check.sh
+    └── backup-disaster-recovery.sh

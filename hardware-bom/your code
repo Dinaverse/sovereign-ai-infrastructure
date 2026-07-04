@@ -1,0 +1,6 @@
+// greetings.js
+module.exports = {
+  greet: function(name) {
+    console.log(`Hey there ${name}!`);
+  }
+};

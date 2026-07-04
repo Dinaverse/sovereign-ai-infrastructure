@@ -1,0 +1,6 @@
+*.env
+.ssh/
+*.tmp
+logs/
+__pycache__/
+venv/
