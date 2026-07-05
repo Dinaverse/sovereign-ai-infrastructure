@@ -14,7 +14,7 @@ This directory documents the physical infrastructure of the sovereign lab — de
 
 | Node | Hostname | Role | CPU | RAM | Storage | GPU |
 |------|----------|------|-----|-----|---------|-----|
-| 🧠 | **Arch-GPU** | GPU Compute / LLM Inference | Intel i5-6500 @ 3.2GHz | 15 GiB | 119 GiB | 4× NVIDIA P106-100 (24 GB) |
+| 🧠 | **Arch-GPU** | GPU Compute / LLM Inference | Intel i5-6500 @ 3.2GHz | 16 GiB | 119 GiB | 4× NVIDIA P106-100 (24 GB) |
 | 🔴 | **Kali-Master** | Orchestrator / SecOps Hub | Intel Xeon E5-2630 v4 @ 2.2GHz | 62 GiB | 909 GiB | None (x86) |
 | 🥧 | **Raspberry-Pi** | IDS / DNS / Network Services | ARM Cortex-A53 | ~1 GiB | 29 GiB | None (ARM) |
 | 🖧 | **Dell-Gateway** | Gateway / Monitoring | x86 server-class | 32 GiB | 500 GiB | None |
@@ -25,6 +25,9 @@ This directory documents the physical infrastructure of the sovereign lab — de
 ## 📋 Hardware Bill of Materials (BOM)
 
 ### GPU Compute Node (Arch-GPU)
+
+**Purpose:** Local LLM inference with multi-GPU acceleration (Qwen 3.5:27B)
+
 ```
 ├── CPU           : Intel Core i5-6500 (4 cores / 4 threads @ 3.2GHz)
 ├── Motherboard   : Intel B150 chipset LGA1151
@@ -42,86 +45,151 @@ This directory documents the physical infrastructure of the sovereign lab — de
 ```
 
 ### Master Orchestrator (Kali-Master)
+
+**Purpose:** Autonomous agent orchestration, security operations hub, MCP bridge
+
 ```
 ├── CPU           : Intel Xeon E5-2630 v4 (10 cores @ 2.2GHz)
 ├── Motherboard   : Intel C610 chipset LGA2011-3
 ├── RAM           : 62 GB DDR4 2133 MHz
 ├── Storage       : 909 GB total (mixed SSD + HDD)
 ├── PSU           : 500W redundant 80+ Platinum
-├── Network       : 10 Gbps Ethernet (iLO remote access)
-└── Cooling       : Enterprise liquid cooling
+├── Cooling       : Active server-grade cooler
+├── OS            : Kali Linux (latest)
+└── Services      :
+    ├── Security-Ops Agent (log monitoring)
+    ├── Net-Analyzer Agent (recon)
+    ├── MCP Bridge (AI integration)
+    └── NVIDIA Morpheus (AI SecOps)
 ```
 
-### Raspberry Pi (Network Services)
+### IDS / Network Services (Raspberry-Pi)
+
+**Purpose:** Network intrusion detection, DNS, network monitoring
+
 ```
-├── SoC           : Broadcom BCM2837 (ARM Cortex-A53, 4 cores)
-├── RAM           : 1 GB LPDDR2
-├── Storage       : 29 GB microSD card (Class 10)
-├── Network       : Gigabit Ethernet
-└── PSU           : 5V 2.5A USB-C
+├── CPU           : ARM Cortex-A53 (Broadcom BCM2835)
+├── RAM           : 1-4 GiB LPDDR4
+├── Storage       : 29 GiB microSD + external USB
+├── PSU           : 5V 3A USB-C
+├── Cooling       : Passive (heatsink)
+├── OS            : Raspbian
+└── Services      :
+    ├── Suricata IDS
+    ├── Dnsmasq (DNS)
+    └── Network monitoring agents
 ```
 
-### Dell Gateway (Monitoring)
+### Gateway & Monitoring (Dell-Gateway)
+
+**Purpose:** Internet gateway, Prometheus/Grafana monitoring hub
+
 ```
 ├── CPU           : x86 server-class processor
-├── RAM           : 32 GB DDR4 ECC
-├── Storage       : 500 GB enterprise SSD
-├── PSU           : Enterprise 650W
-├── Network       : 1 Gbps × 2 (redundant)
-└── Remote Access : iLO / Lights-Out Management
+├── RAM           : 32 GB DDR4
+├── Storage       : 500 GB SSD
+├── PSU           : Enterprise-grade redundant
+├── Cooling       : Integrated server cooling
+├── OS            : Debian / Ubuntu Server
+└── Services      :
+    ├── Prometheus (metrics collection)
+    ├── Grafana (dashboards)
+    ├── Node Exporter
+    └── Networking stack
 ```
 
-### AMD Storage Node (Canwork189)
+### Storage & CPU Compute (AMD-Storage)
+
+**Purpose:** Distributed storage, CPU-intensive workloads
+
 ```
-├── CPU           : AMD FX-8320 Eight-Core Processor @ 3.5GHz
-├── Motherboard   : AMD 970 chipset
+├── CPU           : AMD FX-8320 (8-core @ 3.5GHz)
+├── Motherboard   : AMD 990FX chipset
 ├── RAM           : 7.2 GB DDR3 1600 MHz
-├── Storage       : 46 GB root + 159 GB /local partition
-├── PSU           : 500W
-└── Cooling       : Standard tower cooler
+├── Storage       : 46 GB (internal) + 159 GB (/local SSD)
+├── PSU           : 850W 80+ Bronze
+├── Cooling       : Tower air cooler
+├── OS            : Ubuntu Server 22.04 LTS
+└── Services      :
+    ├── Network file storage (NFS)
+    ├── CPU-bound analytics
+    └── Backup/archive
 ```
 
 ---
 
-## 🔌 Networking
+## 🌐 Network Topology
 
 ```
-[Internet]
-    ↓
-[Dell Gateway / Firewall]
-    ↓
-[Internal LAN (192.168.x.0/24)]
-    ├── Kali-Master (Orchestrator)
-    ├── Arch-GPU (Compute)
-    ├── Raspberry-Pi (IDS / DNS)
-    └── AMD-Storage (NAS)
-
-[Remote Access]
-    └── SSH Hardening + Tailscale VPN
+                    ┌─────────────────────┐
+                    │ Internet Connection │
+                    └──────────┬──────────┘
+                               │
+                    ┌──────────▼──────────┐
+                    │  Dell-Gateway      │
+                    │  (Monitoring Hub)  │
+                    │  Prometheus/Grafana│
+                    └──────────┬──────────┘
+                               │
+                    ┌──────────▼──────────────────────────────────────┐
+                    │         Internal LAN (192.168.x.0/24)           │
+                    └────┬────────────────────────────────────────┬───┘
+                         │                                        │
+        ┌────────────────▼────────────────┐    ┌────────────────▼────────────────┐
+        │    Kali-Master Orchestrator    │    │   Arch-GPU (Compute Node)      │
+        │    ├── Security-Ops Agent      │    │   ├── Ollama (LLM runtime)     │
+        │    ├── Net-Analyzer Agent      │    │   ├── 4× NVIDIA P106-100 GPUs  │
+        │    ├── MCP Bridge              │    │   └── CUDA 11.8 / cuDNN        │
+        │    └── NVIDIA Morpheus         │    └────────────────┬───────────────┘
+        └────────────────┬────────────────┘                    │
+                         │                                     │
+        ┌────────────────▼────────────────┐    ┌──────────────▼──────────────┐
+        │   Raspberry-Pi (IDS)            │    │  AMD-Storage (Storage/CPU)  │
+        │   ├── Suricata IDS              │    │  ├── NFS Storage            │
+        │   ├── DNS Services              │    │  ├── CPU Analytics          │
+        │   └── Network Monitoring        │    │  └── Archive Services       │
+        └────────────────┬────────────────┘    └──────────────┬──────────────┘
+                         │                                    │
+                         └────────────────┬───────────────────┘
+                                          │
+                              (Inter-node networking via SSH/systemd)
 ```
 
 ---
 
-## 📊 Total System Specifications
+## 💰 Cost & Procurement
 
-| Metric | Value |
-|--------|-------|
-| **Total CPU Cores** | 30+ cores (mixed x86 + ARM) |
-| **Total RAM** | 117 GiB |
-| **Total Storage** | 1.7 TB |
-| **GPU VRAM** | 24 GB (4× P106-100) |
-| **Total Power** | ~3500W under load |
-| **Network** | 10 Gbps + 1 Gbps redundancy |
+### Salvage / Repurposing
 
----
+| Component | Source | Cost | Notes |
+|-----------|--------|------|-------|
+| GPU Cards (4×) | Salvage / Bulk purchase | €60-90 each | NVIDIA P106-100, datacenter surplus |
+| Server hardware | Enterprise surplus | €100-200 | Dell, Supermicro servers |
+| RAM modules | Recycled hardware | €10-30 each | DDR4 / DDR3 mixed sources |
+| Storage drives | Mixed sources | €20-50 each | SSD + HDD mix |
 
-## 🔗 Related Documentation
-
-- **Main Infrastructure Repo:** [sovereign-ai-infrastructure](../README.md)
-- **Docker Hosting:** [docker-compose/](../docker-compose/README.md)
-- **Lab Reference:** [my-sovereign-lab](https://github.com/Dinaverse/my-sovereign-lab)
-- **Hardware Setup Guide:** [arch-linux-multi-gpu-llm](https://github.com/Dinaverse/arch-linux-multi-gpu-llm)
+**Total Lab Cost:** ~€2,500-4,000 (salvaged/repurposed hardware at fraction of new cost)
 
 ---
 
-*Built from repurposed enterprise hardware. Engineered for resilience and performance.*
+## 📊 Performance Specs
+
+| Metric | Value | Purpose |
+|--------|-------|---------|
+| **Total VRAM** | 24 GB | Qwen 3.5:27B LLM inference |
+| **Total RAM** | 126+ GB | Multi-service operation |
+| **Total Cores** | 22+ | Distributed processing |
+| **Network** | Gigabit LAN | Inter-node communication |
+| **Storage** | 2+ TB | Logs, models, data |
+
+---
+
+## 🔗 Related Repositories
+
+- [sovereign-ai-infrastructure](https://github.com/Dinaverse/sovereign-ai-infrastructure) — Main architecture docs
+- [arch-linux-multi-gpu-llm](https://github.com/Dinaverse/arch-linux-multi-gpu-llm) — GPU optimization guide
+- [local-ai-sovereign-stack](https://github.com/Dinaverse/local-ai-sovereign-stack) — Docker stack
+
+---
+
+*Sovereignty through ownership. Performance through optimization. Value through revalorization.*
