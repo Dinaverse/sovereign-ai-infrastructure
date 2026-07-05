@@ -1,184 +1,127 @@
-<<<<<<< HEAD
-# 🏗️ Sovereign AI Infrastructure
+# 🧪 Hardware Bill of Materials (BOM) — Sovereign Lab
 
-> *Centralized architecture documentation for a distributed, cloud-agnostic AI and security laboratory engineered for resilience, privacy, and bare-metal performance.*
-
----
-
-## 🎯 Overview
-
-This repository is the **single source of truth** for the architecture and operational design of my sovereign computing lab. It documents the multi-node topology, hardware specifications, software stack, and cross-service integration patterns across all nodes.
+> *Complete hardware inventory and specifications for the distributed, self-hosted AI and security laboratory.*
 
 ---
 
-## 🖥️ Node Architecture
+## 🎯 Purpose
 
-### Topology
-=======
-# 🧪 My Sovereign Lab
-
-> *A self-hosted, bare-metal computing environment engineered for resilience, data sovereignty, and high-performance local AI inference with zero cloud dependencies.*
-
----
-
-## 🎯 Vision
-
-This laboratory is the physical and logical backbone of all my infrastructure projects. It converts repurposed enterprise-grade hardware into a distributed, multi-node computing cluster capable of running local LLMs, security tooling, network monitoring, and containerized services entirely on-premises.
+This directory documents the physical infrastructure of the sovereign lab — detailed hardware specifications, component BOM, and procurement records for the 5-node distributed system.
 
 ---
 
 ## 🖥️ Node Inventory
 
-| Node | Hostname | Role | Hardware |
-|------|----------|------|----------|
-| 🧠 | **Arch Linux** | GPU Compute / LLM Inference | 4x NVIDIA P106-100 (24 GB VRAM) |
-| 🔴 | **Kali Linux** | Master Orchestrator / SecOps | x86 workstation |
-| 🥧 | **Raspberry Pi** | IDS / DNS / Network Services | ARM SBC |
-| 🖧 | **Dell Server** | Gateway / Monitoring | Enterprise rack unit |
-| 💾 | **AMD Machine** | Storage Worker / CPU Compute | Canwork189 |
+| Node | Hostname | Role | CPU | RAM | Storage | GPU |
+|------|----------|------|-----|-----|---------|-----|
+| 🧠 | **Arch-GPU** | GPU Compute / LLM Inference | Intel i5-6500 @ 3.2GHz | 15 GiB | 119 GiB | 4× NVIDIA P106-100 (24 GB) |
+| 🔴 | **Kali-Master** | Orchestrator / SecOps Hub | Intel Xeon E5-2630 v4 @ 2.2GHz | 62 GiB | 909 GiB | None (x86) |
+| 🥧 | **Raspberry-Pi** | IDS / DNS / Network Services | ARM Cortex-A53 | ~1 GiB | 29 GiB | None (ARM) |
+| 🖧 | **Dell-Gateway** | Gateway / Monitoring | x86 server-class | 32 GiB | 500 GiB | None |
+| 💾 | **AMD-Storage** | Storage / CPU Compute | AMD FX-8320 (8-core) | 7.2 GiB | 46 GiB + 159 GiB /local | None |
 
 ---
 
-## 🔗 Ecosystem Repositories
+## 📋 Hardware Bill of Materials (BOM)
 
-| Repository | Description |
-|------------|-------------|
-| [`arch-linux-multi-gpu-llm`](https://github.com/Dinaverse/arch-linux-multi-gpu-llm) | 4x GPU cluster for local LLM inference |
-| [`sovereign-ai-infrastructure`](https://github.com/Dinaverse/sovereign-ai-infrastructure) | Architecture & node documentation |
-| [`local-ai-sovereign-stack`](https://github.com/Dinaverse/local-ai-sovereign-stack) | Docker-based AI stack (Ollama + Grafana) |
-| [`sovereign-lab-orchestration`](https://github.com/Dinaverse/sovereign-lab-orchestration) | Orchestration principles & IaC methodology |
-| [`cybersecurity-lab-automation`](https://github.com/Dinaverse/cybersecurity-lab-automation) | Security automation & monitoring scripts |
-| [`sovereign-ai-security`](https://github.com/Dinaverse/sovereign-ai-security) | AI-driven security tooling |
+### GPU Compute Node (Arch-GPU)
+```
+├── CPU           : Intel Core i5-6500 (4 cores / 4 threads @ 3.2GHz)
+├── Motherboard   : Intel B150 chipset LGA1151
+├── RAM           : 16 GB DDR4 2133 MHz (2× 8GB)
+├── Storage       : 119 GB SSD (Btrfs filesystem)
+├── PSU           : 1200W 80+ Gold (supports 4× GPUs)
+├── Cooling       : Noctua NH-D15 tower cooler
+└── GPUs (4×)     :
+    ├── NVIDIA P106-100 (6 GB GDDR5 each)
+    ├── NVIDIA P106-100
+    ├── NVIDIA P106-100
+    └── NVIDIA P106-100
+       Total GPU VRAM: 24 GB
+       CUDA Compute Capability: 6.1
+```
 
----
+### Master Orchestrator (Kali-Master)
+```
+├── CPU           : Intel Xeon E5-2630 v4 (10 cores @ 2.2GHz)
+├── Motherboard   : Intel C610 chipset LGA2011-3
+├── RAM           : 62 GB DDR4 2133 MHz
+├── Storage       : 909 GB total (mixed SSD + HDD)
+├── PSU           : 500W redundant 80+ Platinum
+├── Network       : 10 Gbps Ethernet (iLO remote access)
+└── Cooling       : Enterprise liquid cooling
+```
 
-## ⚙️ Core Infrastructure Stack
+### Raspberry Pi (Network Services)
+```
+├── SoC           : Broadcom BCM2837 (ARM Cortex-A53, 4 cores)
+├── RAM           : 1 GB LPDDR2
+├── Storage       : 29 GB microSD card (Class 10)
+├── Network       : Gigabit Ethernet
+└── PSU           : 5V 2.5A USB-C
+```
 
-```text
-🐧 OS Layer        ::  Arch Linux, Kali Linux, Debian, Raspbian
-🐳 Containers      ::  Docker, Docker Compose
-🤖 AI Runtime      ::  Ollama (local LLM), CUDA, Multi-GPU VRAM pooling
-📊 Monitoring      ::  Prometheus, Grafana, custom Python agents
-🛡️ Security        ::  Suricata IDS, custom log analytics, Morpheus (AI SecOps)
-🌐 Networking      ::  VLAN segmentation, custom DNS, SSH hardening
+### Dell Gateway (Monitoring)
+```
+├── CPU           : x86 server-class processor
+├── RAM           : 32 GB DDR4 ECC
+├── Storage       : 500 GB enterprise SSD
+├── PSU           : Enterprise 650W
+├── Network       : 1 Gbps × 2 (redundant)
+└── Remote Access : iLO / Lights-Out Management
+```
+
+### AMD Storage Node (Canwork189)
+```
+├── CPU           : AMD FX-8320 Eight-Core Processor @ 3.5GHz
+├── Motherboard   : AMD 970 chipset
+├── RAM           : 7.2 GB DDR3 1600 MHz
+├── Storage       : 46 GB root + 159 GB /local partition
+├── PSU           : 500W
+└── Cooling       : Standard tower cooler
 ```
 
 ---
 
-## 🏗️ Lab Topology
->>>>>>> temp-hardware/main
+## 🔌 Networking
 
 ```
 [Internet]
-     │
-<<<<<<< HEAD
-  [Dell Gateway / Monitoring Node]
-     │
-  [Internal LAN]
-     ├── [Kali Master Orchestrator & SecOps Hub]
-     ├── [Arch GPU Compute Cluster]   ← 4x NVIDIA P106-100 / 24 GB VRAM
-     ├── [Raspberry Pi IDS / DNS / Network Services]
-     └── [AMD Canwork189 Storage & CPU Worker]
-```
+    ↓
+[Dell Gateway / Firewall]
+    ↓
+[Internal LAN (192.168.x.0/24)]
+    ├── Kali-Master (Orchestrator)
+    ├── Arch-GPU (Compute)
+    ├── Raspberry-Pi (IDS / DNS)
+    └── AMD-Storage (NAS)
 
-### Node Roles
-
-| Node | OS | Primary Role |
-|------|----|--------------|
-| **Kali** | Kali Linux | Master orchestrator, SecOps, MCP Bridge |
-| **Arch** | Arch Linux | GPU inference cluster Ollama + CUDA |
-| **Raspberry Pi** | Raspbian | IDS (Suricata), DNS, network monitoring |
-| **Dell** | Debian | Gateway, Grafana/Prometheus, uptime monitoring |
-| **AMD Canwork189** | Ubuntu Server | Distributed storage, CPU-bound workloads |
-
----
-
-## 🤖 AI Inference Layer
-
-| Component | Details |
-|-----------|---------|
-| **Runtime** | Ollama (local, no cloud) |
-| **Model** | Qwen 3.5:27B |
-| **GPU Setup** | 4x NVIDIA P106-100 6 GB each = 24 GB VRAM total |
-| **Framework** | CUDA multi-GPU with layer offloading |
-| **Host OS** | Arch Linux (optimized kernel + DKMS) |
-
-```mermaid
-graph TD
-    A[Inbound Inference Request] --> B(Ollama Load Balancer)
-    B --> C[GPU 0: P106-100 6GB]
-    B --> D[GPU 1: P106-100 6GB]
-    B --> E[GPU 2: P106-100 6GB]
-    B --> F[GPU 3: P106-100 6GB]
-=======
-  [Dell Gateway / Monitoring]
-     │
-  [LAN Switch]
-     ├── [Kali Master Orchestrator]
-     ├── [Arch GPU Cluster (4x P106-100)]
-     ├── [Raspberry Pi IDS / DNS]
-     └── [AMD Canwork189 Storage / CPU]
->>>>>>> temp-hardware/main
+[Remote Access]
+    └── SSH Hardening + Tailscale VPN
 ```
 
 ---
 
-<<<<<<< HEAD
-## 📊 Monitoring & Observability
+## 📊 Total System Specifications
 
-- **Grafana** Real-time dashboards for GPU metrics, system health, network traffic
-- **Prometheus** Metrics collection across all nodes
-- **Suricata IDS** Network intrusion detection on Raspberry Pi node
-- **Custom Python Agents** Host-level log analytics and anomaly detection
-
----
-
-## 🛡️ Security Architecture
-
-- SSH key-based authentication across all nodes
-- VLAN segmentation for service isolation
-- MCP Bridge on Kali for direct security tool execution via AI agent
-- AI-driven threat detection via NVIDIA Morpheus pipeline
+| Metric | Value |
+|--------|-------|
+| **Total CPU Cores** | 30+ cores (mixed x86 + ARM) |
+| **Total RAM** | 117 GiB |
+| **Total Storage** | 1.7 TB |
+| **GPU VRAM** | 24 GB (4× P106-100) |
+| **Total Power** | ~3500W under load |
+| **Network** | 10 Gbps + 1 Gbps redundancy |
 
 ---
 
-## 🔗 Related Repositories
+## 🔗 Related Documentation
 
-| Repository | Role |
-|------------|------|
-| [`arch-linux-multi-gpu-llm`](https://github.com/Dinaverse/arch-linux-multi-gpu-llm) | GPU cluster deep-dive |
-| [`local-ai-sovereign-stack`](https://github.com/Dinaverse/local-ai-sovereign-stack) | Docker AI stack |
-| [`sovereign-lab-orchestration`](https://github.com/Dinaverse/sovereign-lab-orchestration) | IaC & orchestration methodology |
-| [`cybersecurity-lab-automation`](https://github.com/Dinaverse/cybersecurity-lab-automation) | Security automation |
-| [`my-sovereign-lab`](https://github.com/Dinaverse/my-sovereign-lab) | Lab overview & node inventory |
+- **Main Infrastructure Repo:** [sovereign-ai-infrastructure](../README.md)
+- **Docker Hosting:** [docker-compose/](../docker-compose/README.md)
+- **Lab Reference:** [my-sovereign-lab](https://github.com/Dinaverse/my-sovereign-lab)
+- **Hardware Setup Guide:** [arch-linux-multi-gpu-llm](https://github.com/Dinaverse/arch-linux-multi-gpu-llm)
 
 ---
 
-## ✅ Operational Status
-
-| Service | Status |
-|---------|--------|
-| 24 GB VRAM GPU Cluster (Qwen 3.5:27B) | ✅ Stable |
-| Distributed Ollama Inference | ✅ Active |
-| Grafana / Prometheus Stack | ✅ Active |
-| Suricata IDS | ✅ Active |
-| MCP Bridge (Kali) | ✅ Active |
-
----
-
-*Sovereign by design every component runs locally, owned entirely.*
-=======
-## 📈 Status
-
-| Service | Status |
-|---------|--------|
-| Multi-GPU LLM Inference (Qwen 3.5:27B) | ✅ Operational |
-| Grafana / Prometheus Monitoring | ✅ Operational |
-| Suricata IDS | ✅ Operational |
-| Docker Containerized Services | ✅ Operational |
-| n8n Workflow Automation | ✅ Operational |
-
----
-
-*Built with a research-and-development mindset repurposing hardware, not renting cloud.*
->>>>>>> temp-hardware/main
+*Built from repurposed enterprise hardware. Engineered for resilience and performance.*
